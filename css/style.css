@@ -3,6 +3,14 @@
     margin:0;
 }
 
+.title {
+    text-align: center;
+}
+
+.subtitle {
+    text-align: center;
+}
+
 .trees {
     display: flex;
     justify-content: center;
@@ -34,6 +42,7 @@
 }
 .guess {
     width:15rem;
+    margin:auto;
 }
 .selected {
     background-color: red;
@@ -44,4 +53,5 @@
 .previous {
     height: 150px;
     overflow-y: scroll;
+    text-align: center;
 }
