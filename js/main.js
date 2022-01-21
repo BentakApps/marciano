@@ -21,6 +21,8 @@ let setBoard = () => {
     while (previous.firstChild){
         previous.firstChild.remove();
     }
+    let treeRow = document.createElement("div");
+    treeRow.className = "tree-row";
     for(let i = 1; i <= maxTrees; i++){
         let tree=document.createElement("div");
         tree.className = "tree";
@@ -39,8 +41,14 @@ let setBoard = () => {
         //symbol.onclick = ev => guess(ev.target.parentElement.id);
         tree.appendChild(symbol);
         tree.appendChild(number);
-        trees.appendChild(tree);
+        treeRow.appendChild(tree);
+        if(Math.floor(i/10)==i/10){
+            trees.appendChild(treeRow);
+            treeRow = document.createElement("div");
+            treeRow.className = "tree-row";
+        }
     }
+    trees.appendChild(treeRow);
     martian = Math.ceil(Math.random()*maxTrees);
 }
 
@@ -66,6 +74,7 @@ let guess = (n) => {
         if(martian == n){
             gameOver(n);
         }
+        previous.scrollTop = previous.scrollHeight;
     }
     document.getElementById("guess-input").value = '';
 }
@@ -74,7 +83,7 @@ let setIsLess = n => {
     let p = document.createElement("div");
         p.innerHTML = "O marciano está numa árvore MENOR que " + n;
     previous.appendChild(p);
-    
+
     let tree = document.getElementById(n);
     let treeNumber = tree.querySelector('.tree-number');
     let treeSymbol = tree.querySelector('.tree-symbol');
@@ -111,5 +120,6 @@ let taken = n => {
     let p = document.createElement("div");
         p.innerHTML = "Você já tentou a árvore " + n;
     previous.appendChild(p);
+    previous.scrollTop = previous.scrollHeight;
 }
 setBoard();
